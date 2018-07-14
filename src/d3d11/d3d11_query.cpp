@@ -7,24 +7,26 @@ namespace dxvk {
           D3D11Device*      device,
     const D3D11_QUERY_DESC& desc)
   : m_device(device), m_desc(desc) {
+    Rc<DxvkDevice> dxvkDev = m_device->GetDXVKDevice();
+    
     switch (m_desc.Query) {
       case D3D11_QUERY_EVENT:
-        m_event = new DxvkEvent();
+        m_event = dxvkDev->createEvent();
         break;
         
       case D3D11_QUERY_OCCLUSION:
-        m_query = new DxvkQuery(
+        m_query = dxvkDev->createQuery(
           VK_QUERY_TYPE_OCCLUSION,
           VK_QUERY_CONTROL_PRECISE_BIT);
         break;
       
       case D3D11_QUERY_OCCLUSION_PREDICATE:
-        m_query = new DxvkQuery(
+        m_query = dxvkDev->createQuery(
           VK_QUERY_TYPE_OCCLUSION, 0);
         break;
         
       case D3D11_QUERY_TIMESTAMP:
-        m_query = new DxvkQuery(
+        m_query = dxvkDev->createQuery(
           VK_QUERY_TYPE_TIMESTAMP, 0);
         break;
       
@@ -32,7 +34,7 @@ namespace dxvk {
         break;
       
       case D3D11_QUERY_PIPELINE_STATISTICS:
-        m_query = new DxvkQuery(
+        m_query = dxvkDev->createQuery(
           VK_QUERY_TYPE_PIPELINE_STATISTICS, 0);
         break;
       
