@@ -151,6 +151,11 @@ namespace dxvk {
   }
   
   
+  Rc<DxvkEvent> DxvkDevice::createEvent() {
+    return new DxvkEvent();
+  }
+  
+  
   Rc<DxvkImage> DxvkDevice::createImage(
     const DxvkImageCreateInfo&  createInfo,
           VkMemoryPropertyFlags memoryType) {
@@ -162,6 +167,13 @@ namespace dxvk {
     const Rc<DxvkImage>&            image,
     const DxvkImageViewCreateInfo&  createInfo) {
     return new DxvkImageView(m_vkd, image, createInfo);
+  }
+  
+  
+  Rc<DxvkQuery> DxvkDevice::createQuery(
+          VkQueryType               queryType,
+          VkQueryControlFlags       queryFlags) {
+    return new DxvkQuery(queryType, queryFlags);
   }
   
   

@@ -212,6 +212,12 @@ namespace dxvk {
       const DxvkBufferViewCreateInfo& createInfo);
     
     /**
+     * \brief Creates an event object
+     * \returns The event object
+     */
+    Rc<DxvkEvent> createEvent();
+    
+    /**
      * \brief Creates an image object
      * 
      * \param [in] createInfo Image create info
@@ -232,6 +238,17 @@ namespace dxvk {
     Rc<DxvkImageView> createImageView(
       const Rc<DxvkImage>&            image,
       const DxvkImageViewCreateInfo&  createInfo);
+    
+    /**
+     * \brief Creates a query object
+     * 
+     * \param [in] queryType Query type
+     * \param [in] queryFlags Query flags
+     * \returns The query object
+     */
+    Rc<DxvkQuery> createQuery(
+            VkQueryType               queryType,
+            VkQueryControlFlags       queryFlags);
     
     /**
      * \brief Creates a query pool
