@@ -605,6 +605,22 @@ namespace dxvk {
       const DxvkBlendMode&      blendMode);
     
     /**
+     * \brief Sets predicate for conditional rendering
+     * 
+     * When a predicate is set, rendering and dispatch
+     * commands will only be true if the predicate is
+     * non-zero, or if the \c inversePredicate flag is
+     * set, if the predicate is zero. The query must be
+     * in \c Pending or \c Available state when it is
+     * used for conditional rendering.
+     * \param [in] query The query to use as predicate
+     * \param [in] invert If true, inverts the predicate
+     */
+    void setPredicate(
+      const DxvkQueryRevision&  query,
+            bool                invert);
+    
+    /**
      * \brief Signals an event
      * \param [in] event The event
      */

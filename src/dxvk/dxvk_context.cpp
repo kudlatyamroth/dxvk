@@ -1683,6 +1683,13 @@ namespace dxvk {
   }
   
   
+  void DxvkContext::setPredicate(
+    const DxvkQueryRevision&  query,
+          bool                inversePredicate) {
+    Logger::warn("DxvkContext::setPredicate");
+  }
+  
+  
   void DxvkContext::signalEvent(const DxvkEventRevision& event) {
     m_cmd->trackEvent(event);
   }
