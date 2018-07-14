@@ -239,13 +239,15 @@ namespace dxvk {
   void STDMETHODCALLTYPE D3D11DeviceContext::SetPredication(
           ID3D11Predicate*                  pPredicate,
           BOOL                              PredicateValue) {
-    static bool s_errorShown = false;
-    
-    if (!std::exchange(s_errorShown, true))
-      Logger::err("D3D11DeviceContext::SetPredication: Stub");
-    
     m_state.pr.predicateObject = static_cast<D3D11Query*>(pPredicate);
     m_state.pr.predicateValue  = PredicateValue;
+    
+    EmitCs([
+      cPredicateObject = m_state.pr.predicateObject,
+      cPredicateValue  = m_state.pr.predicateValue
+    ] (DxvkContext* ctx) {
+      cPredicateObject->SetPredicate(ctx, !cPredicateValue);
+    });
   }
   
   

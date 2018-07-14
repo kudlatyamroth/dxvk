@@ -39,6 +39,8 @@ namespace dxvk {
     
     void Signal(DxvkContext* ctx, uint32_t revision);
     
+    void SetPredicate(DxvkContext* ctx, bool invert);
+    
     HRESULT STDMETHODCALLTYPE GetData(
             void*                             pData,
             UINT                              GetDataFlags);

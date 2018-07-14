@@ -158,6 +158,14 @@ namespace dxvk {
   }
   
   
+  void D3D11Query::SetPredicate(DxvkContext* ctx, bool invert) {
+    if (m_desc.Query == D3D11_QUERY_OCCLUSION_PREDICATE) {
+      DxvkQueryRevision rev = { m_query, m_revision };
+      ctx->setPredicate(rev, invert);
+    }
+  }
+  
+  
   void D3D11Query::Signal(DxvkContext* ctx, uint32_t revision) {
     switch (m_desc.Query) {
       case D3D11_QUERY_EVENT: {
